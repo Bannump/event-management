@@ -297,7 +297,7 @@ function InvitesManagement() {
               padding: '0.5rem 1rem',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--gray-300)',
-              backgroundColor: 'white',
+              backgroundColor: 'var(--input-bg)',
               fontSize: '0.875rem',
               color: 'var(--gray-900)',
               cursor: 'pointer',

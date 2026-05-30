@@ -25,9 +25,16 @@ interface ResourceAllocation {
   availabilityDetails?: any;
 }
 
-function EventForm() {
-  const { id } = useParams<{ id: string }>();
+interface EventFormProps {
+  id?: string;
+  onClose?: () => void;
+}
+
+function EventForm({ id: propId, onClose }: EventFormProps = {}) {
+  const params = useParams<{ id: string }>();
+  const id = propId ?? params.id;
   const navigate = useNavigate();
+  const handleClose = onClose ?? (() => navigate('/events'));
   const { user, isAdmin, isOrg } = useAuth();
   const [loading, setLoading] = useState(false);
   const [resources, setResources] = useState<Resource[]>([]);
@@ -73,10 +80,10 @@ function EventForm() {
       // Org admins cannot edit past events
       if (isOrg && !isAdmin && isPastEvent(eventData)) {
         toast.error('Cannot edit past events');
-        navigate('/events');
+        handleClose();
         return;
       }
-      
+
       setEvent({
         title: eventData.title || '',
         description: eventData.description || '',
@@ -260,9 +267,6 @@ function EventForm() {
                 });
                 
                 const availability = availabilityResponse.data;
-                const currentAlloc = currentAllocationsData.find((a: any) => a.id === alloc.id);
-                const quantityChange = alloc.quantity - (currentAlloc?.quantity || 0);
-                
                 // Check if the new quantity is available
                 if (availability.availableQuantity < alloc.quantity) {
                   const resource = resources.find(r => r.id === alloc.resourceId);
@@ -329,7 +333,7 @@ function EventForm() {
       }
 
       toast.success(id ? 'Event updated successfully' : 'Event created successfully');
-      navigate('/events');
+      handleClose();
     } catch (error: any) {
       console.error('Failed to save event:', error);
       const errorMessage = error.response?.data?.message || error.message || 'Failed to save event';
@@ -472,7 +476,7 @@ function EventForm() {
 
         {/* Resource Allocation Section */}
         {(isAdmin || isOrg) && (
-          <div style={{ marginBottom: '2rem', padding: '1.5rem', background: 'var(--gray-50)', borderRadius: 'var(--radius-lg)' }}>
+          <div style={{ marginBottom: '2rem', padding: '1.5rem', background: 'var(--gray-200)', borderRadius: 'var(--radius-lg)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
               <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--gray-900)' }}>
                 Resource Allocation
@@ -500,7 +504,7 @@ function EventForm() {
                       gap: '1rem',
                       alignItems: 'end',
                       padding: '1rem',
-                      background: 'white',
+                      background: 'var(--input-bg)',
                       borderRadius: 'var(--radius-md)',
                       border: '1px solid var(--gray-200)'
                     }}>
@@ -579,9 +583,9 @@ function EventForm() {
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? 'Saving...' : id ? 'Update Event' : 'Create Event'}
           </button>
-          <Link to="/events" className="btn btn-secondary">
+          <button type="button" className="btn btn-secondary" onClick={handleClose}>
             Cancel
-          </Link>
+          </button>
         </div>
       </form>
     </div>

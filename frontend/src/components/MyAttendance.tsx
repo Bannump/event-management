@@ -145,7 +145,7 @@ function MyAttendance() {
         alignItems: 'center',
         marginBottom: '2rem',
         padding: '2rem',
-        backgroundColor: 'var(--gray-50)',
+        backgroundColor: 'var(--gray-200)',
         borderRadius: '12px'
       }}>
         <div style={{ position: 'relative', width: '200px', height: '200px' }}>

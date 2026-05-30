@@ -258,26 +258,10 @@ function EventsList() {
       </div>
 
       {/* Search and Filter Section */}
-      <div style={{ 
-        marginBottom: '1.5rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem'
-      }}>
-        {/* Search Input */}
-        <div style={{ position: 'relative', width: '100%' }}>
+      <div className="search-filter-bar">
+        <div className="search-input-wrapper">
           <svg
-            style={{
-              position: 'absolute',
-              left: '0.875rem',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '20px',
-              height: '20px',
-              color: 'var(--gray-400)',
-              pointerEvents: 'none',
-              zIndex: 1
-            }}
+            className="search-input-icon"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -285,66 +269,24 @@ function EventsList() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
           </svg>
           <input
             type="text"
+            className="search-input-field"
             placeholder="Search events by title or description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.75rem 1rem 0.75rem 2.75rem',
-              fontSize: '0.9375rem',
-              lineHeight: '1.5',
-              color: 'var(--gray-900)',
-              background: 'white',
-              border: '1px solid var(--gray-300)',
-              borderRadius: 'var(--radius-md)',
-              transition: 'all 0.2s ease',
-              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--primary-500)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--gray-300)';
-              e.target.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
-            }}
           />
         </div>
-        
-        {/* Filter Dropdown */}
-        <div style={{ 
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          flexWrap: 'wrap'
-        }}>
-          <label style={{ 
-            fontSize: '0.875rem', 
-            fontWeight: 600, 
-            color: 'var(--gray-700)',
-            whiteSpace: 'nowrap'
-          }}>
-            Filter Events:
-          </label>
+
+        <div className="filter-row">
+          <label className="filter-label">Filter:</label>
           <select
             value={eventFilter}
             onChange={(e) => setEventFilter(e.target.value as 'all' | 'my-org' | 'global')}
-            style={{
-              padding: '0.5rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--gray-300)',
-              backgroundColor: 'white',
-              fontSize: '0.875rem',
-              color: 'var(--gray-900)',
-              cursor: 'pointer',
-              minWidth: '180px',
-              transition: 'all 0.2s ease'
-            }}
+            className="filter-select-field"
           >
             <option value="all">All Events</option>
             {user?.organizationId && (
@@ -357,67 +299,54 @@ function EventsList() {
 
       {/* Tab Navigation for Users */}
       {!isAdmin && !isOrg && (
-        <div style={{ 
-          display: 'flex', 
-          gap: '0.5rem', 
-          marginBottom: '1.5rem',
-          borderBottom: '2px solid var(--gray-200)',
-          paddingBottom: '0.5rem'
-        }}>
+        <div className="tab-bar">
           <button
             onClick={() => setActiveTab('available')}
-            className={`btn ${activeTab === 'available' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'available' ? 'active' : ''}`}
           >
-            Available Events ({availableEvents.length})
+            Available ({availableEvents.length})
           </button>
           <button
             onClick={() => setActiveTab('registered')}
-            className={`btn ${activeTab === 'registered' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'registered' ? 'active' : ''}`}
           >
-            My Registered Events ({userRegisteredEvents.length})
+            Registered ({userRegisteredEvents.length})
           </button>
           <button
             onClick={() => setActiveTab('ongoing')}
-            className={`btn ${activeTab === 'ongoing' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'ongoing' ? 'active' : ''}`}
           >
-            Ongoing Events ({userOngoingEvents.length})
+            Ongoing ({userOngoingEvents.length})
           </button>
           <button
             onClick={() => setActiveTab('past')}
-            className={`btn ${activeTab === 'past' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'past' ? 'active' : ''}`}
           >
-            Past Events ({userPastEvents.length})
+            Past ({userPastEvents.length})
           </button>
         </div>
       )}
-      
+
       {/* Tab Navigation for Admins/Org Admins */}
       {(isAdmin || isOrg) && (
-        <div style={{ 
-          display: 'flex', 
-          gap: '0.5rem', 
-          marginBottom: '1.5rem',
-          borderBottom: '2px solid var(--gray-200)',
-          paddingBottom: '0.5rem',
-          flexWrap: 'wrap'
-        }}>
+        <div className="tab-bar">
           <button
             onClick={() => setActiveTab('upcoming')}
-            className={`btn ${activeTab === 'upcoming' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'upcoming' ? 'active' : ''}`}
           >
-            Upcoming Events ({upcomingEvents.length})
+            Upcoming ({upcomingEvents.length})
           </button>
           <button
             onClick={() => setActiveTab('ongoing')}
-            className={`btn ${activeTab === 'ongoing' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'ongoing' ? 'active' : ''}`}
           >
-            Ongoing Events ({adminOngoingEvents.length})
+            Ongoing ({adminOngoingEvents.length})
           </button>
           <button
             onClick={() => setActiveTab('past')}
-            className={`btn ${activeTab === 'past' ? 'btn-primary' : 'btn-secondary'}`}
+            className={`tab-btn ${activeTab === 'past' ? 'active' : ''}`}
           >
-            Past Events ({adminPastEvents.length})
+            Past ({adminPastEvents.length})
           </button>
         </div>
       )}

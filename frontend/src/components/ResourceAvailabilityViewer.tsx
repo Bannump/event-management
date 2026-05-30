@@ -92,7 +92,7 @@ function ResourceAvailabilityViewer({
 
   if (!startTime || !endTime) {
     return (
-      <div style={{ padding: '1rem', background: 'var(--gray-50)', borderRadius: 'var(--radius-md)', marginTop: '0.5rem' }}>
+      <div style={{ padding: '1rem', background: 'var(--gray-200)', borderRadius: 'var(--radius-md)', marginTop: '0.5rem' }}>
         <p style={{ color: 'var(--gray-600)', fontSize: '0.875rem', margin: 0 }}>
           Select event start and end time to check resource availability
         </p>
@@ -102,7 +102,7 @@ function ResourceAvailabilityViewer({
 
   if (loading) {
     return (
-      <div style={{ padding: '1rem', background: 'var(--gray-50)', borderRadius: 'var(--radius-md)', marginTop: '0.5rem' }}>
+      <div style={{ padding: '1rem', background: 'var(--gray-200)', borderRadius: 'var(--radius-md)', marginTop: '0.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gray-600)' }}>
           <div className="spinner" style={{ width: '16px', height: '16px', borderWidth: '2px' }}></div>
           <span style={{ fontSize: '0.875rem' }}>Checking availability...</span>
@@ -228,7 +228,7 @@ function ResourceAvailabilityViewer({
                   key={idx}
                   style={{
                     padding: '0.5rem',
-                    background: 'white',
+                    background: 'var(--input-bg)',
                     borderRadius: 'var(--radius-sm)',
                     marginBottom: '0.5rem',
                     fontSize: '0.875rem',

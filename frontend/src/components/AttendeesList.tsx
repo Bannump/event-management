@@ -25,10 +25,17 @@ interface Event {
   organizationId: string;
 }
 
-function AttendeesList() {
-  const { eventId } = useParams<{ eventId: string }>();
+interface AttendeesListProps {
+  eventId?: string;
+  onClose?: () => void;
+}
+
+function AttendeesList({ eventId: propEventId, onClose }: AttendeesListProps = {}) {
+  const params = useParams<{ eventId: string }>();
+  const eventId = propEventId ?? params.eventId;
   const navigate = useNavigate();
   const { user, isAdmin, isOrg } = useAuth();
+  const handleClose = onClose ?? (() => navigate('/events'));
   const [attendances, setAttendances] = useState<Attendance[]>([]);
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
@@ -110,7 +117,7 @@ function AttendeesList() {
           </svg>
           <h3>Access Denied</h3>
           <p>You must be registered for this event to view the attendee list.</p>
-          <button onClick={() => navigate('/events')} className="btn btn-primary">
+          <button onClick={handleClose} className="btn btn-primary">
             Back to Events
           </button>
         </div>
@@ -126,7 +133,7 @@ function AttendeesList() {
           {event && <p style={{ color: 'var(--gray-600)', marginTop: '0.5rem' }}>{event.title}</p>}
         </div>
         <div className="card-actions">
-          <button onClick={() => navigate('/events')} className="btn btn-secondary">
+          <button onClick={handleClose} className="btn btn-secondary">
             Back to Events
           </button>
         </div>

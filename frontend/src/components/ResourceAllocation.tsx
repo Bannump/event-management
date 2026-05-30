@@ -228,15 +228,15 @@ function ResourceAllocation() {
                 fontSize: '0.9375rem',
                 lineHeight: '1.5',
                 color: 'var(--gray-900)',
-                background: 'white',
+                background: 'var(--input-bg)',
                 border: '1px solid var(--gray-300)',
                 borderRadius: 'var(--radius-md)',
                 transition: 'all 0.2s ease',
-                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+                boxShadow: 'none'
               }}
               onFocus={(e) => {
                 e.target.style.borderColor = 'var(--primary-500)';
-                e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                e.target.style.boxShadow = '0 0 0 3px rgba(139, 92, 246, 0.15)';
               }}
               onBlur={(e) => {
                 e.target.style.borderColor = 'var(--gray-300)';
@@ -384,7 +384,7 @@ function ResourceAllocation() {
                   <div
                     style={{
                       padding: '1rem 1.25rem',
-                      background: 'var(--gray-50)',
+                      background: 'var(--gray-200)',
                       borderRadius: 'var(--radius-md)',
                       marginBottom: '0.75rem',
                       border: '1px solid var(--gray-200)',
@@ -523,7 +523,7 @@ function ResourceAllocation() {
         >
           <div
             style={{
-              background: 'white',
+              background: 'var(--input-bg)',
               borderRadius: 'var(--radius-lg)',
               padding: '2rem',
               maxWidth: '500px',
@@ -579,7 +579,7 @@ function ResourceAllocation() {
               <div
                 style={{
                   padding: '1rem',
-                  background: 'var(--gray-50)',
+                  background: 'var(--gray-200)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--gray-200)',
                   textAlign: 'center',
@@ -661,8 +661,8 @@ function ResourceAllocation() {
                 disabled={
                   editQuantity === editingAllocationData.quantity ||
                   editQuantity < 1 ||
-                  (availabilityInfo && 
-                   editingAllocationData.resource?.type === 'consumable' && 
+                  !!(availabilityInfo &&
+                   editingAllocationData.resource?.type === 'consumable' &&
                    availabilityInfo.remainingQuantity + editingAllocationData.quantity < editQuantity)
                 }
                 title={

@@ -160,7 +160,7 @@ function PublicInviteResponse() {
       </div>
 
       <div style={{
-        background: 'var(--gray-50)',
+        background: 'var(--gray-200)',
         borderRadius: 'var(--radius-lg)',
         padding: '1.5rem',
         marginBottom: '2rem',
@@ -280,7 +280,7 @@ function PublicInviteResponse() {
       {actionStatus === 'declined' && (
         <div style={{ textAlign: 'center' }}>
           <div style={{
-            background: 'var(--gray-50)',
+            background: 'var(--gray-200)',
             border: '1px solid var(--gray-200)',
             borderRadius: 'var(--radius-md)',
             padding: '1rem',

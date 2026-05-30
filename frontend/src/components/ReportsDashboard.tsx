@@ -21,12 +21,12 @@ import {
 
 // Color schemes for charts
 const CHART_COLORS = {
-  primary: '#3b82f6',
-  secondary: '#8b5cf6',
-  success: '#10b981',
-  warning: '#f59e0b',
-  danger: '#ef4444',
-  info: '#06b6d4',
+  primary: '#8b5cf6',
+  secondary: '#a78bfa',
+  success: '#34d399',
+  warning: '#fbbf24',
+  danger: '#f87171',
+  info: '#22d3ee',
 };
 
 const VIOLATION_COLORS = ['#ef4444', '#f59e0b', '#8b5cf6'];
@@ -307,11 +307,11 @@ function ReportsDashboard() {
       const fullName = data?.fullName || label;
       return (
         <div style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--gray-100)',
           padding: '0.75rem',
-          border: '1px solid #e5e7eb',
+          border: '1px solid var(--gray-300)',
           borderRadius: '0.5rem',
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+          boxShadow: 'none',
           maxWidth: '300px',
         }}>
           <p style={{ fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem', wordBreak: 'break-word' }}>
@@ -385,7 +385,7 @@ function ReportsDashboard() {
               {groupDoubleBookedByUser().map((userGroup, groupIdx) => (
                 <div key={groupIdx} style={{ marginBottom: '2rem' }}>
                   <div style={{
-                    background: 'var(--gray-50)',
+                    background: 'var(--gray-200)',
                     padding: '1rem 1.25rem',
                     borderBottom: '2px solid var(--gray-300)',
                     marginBottom: '0.5rem',
@@ -449,7 +449,7 @@ function ReportsDashboard() {
             <>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
                 {prepareViolationChartData().length > 0 && (
-                  <div style={{ backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <div style={{ backgroundColor: 'var(--gray-100)', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: 'none' }}>
                     <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-900)' }}>
                       Violations by Type
                     </h3>
@@ -475,13 +475,13 @@ function ReportsDashboard() {
                   </div>
                 )}
                 {prepareViolationByResourceData().length > 0 && (
-                  <div style={{ backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                  <div style={{ backgroundColor: 'var(--gray-100)', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: 'none' }}>
                     <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-900)' }}>
                       Top Violated Resources
                     </h3>
                     <ResponsiveContainer width="100%" height={350}>
                       <BarChart data={prepareViolationByResourceData()} layout="vertical" margin={{ top: 20, right: 30, left: 100, bottom: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#1e1e26" />
                         <XAxis type="number" stroke="#6b7280" tick={{ fontSize: 12 }} />
                         <YAxis dataKey="name" type="category" width={90} stroke="#6b7280" tick={{ fontSize: 11 }} />
                         <Tooltip content={<CustomTooltip />} />
@@ -543,13 +543,13 @@ function ReportsDashboard() {
           ) : (
             <>
               {prepareResourceUtilizationChartData().length > 0 && (
-                <div style={{ marginBottom: '2rem', backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+                <div style={{ marginBottom: '2rem', backgroundColor: 'var(--gray-100)', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: 'none' }}>
                   <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-900)' }}>
                     Resource Utilization Overview
                   </h3>
                   <ResponsiveContainer width="100%" height={450}>
                     <ComposedChart data={prepareResourceUtilizationChartData()} margin={{ top: 20, right: 30, left: 20, bottom: 100 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#1e1e26" />
                     <XAxis 
                       dataKey="name" 
                       angle={-45} 
@@ -712,13 +712,13 @@ function ReportsDashboard() {
             </div>
           ) : (
             <>
-              <div style={{ marginBottom: '2rem', backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <div style={{ marginBottom: '2rem', backgroundColor: 'var(--gray-100)', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: 'none' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-900)' }}>
                   External Attendees by Event
                 </h3>
                 <ResponsiveContainer width="100%" height={450}>
                   <ComposedChart data={prepareExternalAttendeesChartData()} margin={{ top: 20, right: 30, left: 20, bottom: 100 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#1e1e26" />
                     <XAxis 
                       dataKey="name" 
                       angle={-45} 
@@ -790,13 +790,13 @@ function ReportsDashboard() {
             </div>
           ) : (
             <>
-              <div style={{ marginBottom: '2rem', backgroundColor: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <div style={{ marginBottom: '2rem', backgroundColor: 'var(--gray-100)', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: 'none' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: 'var(--gray-900)' }}>
                   Show-Up Rate Analysis (Top 15 Events)
                 </h3>
                 <ResponsiveContainer width="100%" height={550}>
                   <ComposedChart data={prepareShowUpRateChartData()} margin={{ top: 20, right: 50, left: 20, bottom: 100 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#1e1e26" />
                     <XAxis 
                       dataKey="name" 
                       angle={-45} 
